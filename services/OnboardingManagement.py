@@ -3,7 +3,7 @@ from services.TenantManagement import TenantManagement
 from services.UserManagement import UserManagement
 
 
-class Registration():
+class OnboardingManagement():
     _tenant_management: TenantManagement
     _user_management: UserManagement
 
