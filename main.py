@@ -4,8 +4,8 @@ import signal
 
 
 # Fake databases
-tenants: list[dict[str, str]] = []
-users: list[dict[str, str]] = []
+tenants: list[dict[str, str]] = [] # customer_shortname, tenant_id
+users:  list[dict[str, str, str]] = [] # email, customer_shortname, tenant_id
 
 
 class TenantManagement():
@@ -55,8 +55,40 @@ class TenantManagement():
     
 
 
-def user_management():
-    pass
+class UserManagement():
+    def create_user(self, email: str = None, customer_shortname: str = None, tenant_id: str = None) -> bool:
+        if(email == None or customer_shortname == None or tenant_id == None):
+            return None
+
+        # Check if the user already exists in the database
+        for user in users:
+            if(user[0] == email and user[1] == customer_shortname and user[2] == tenant_id):
+                return True # User already exists
+
+        # Add the user to the users database
+        users.append([email, customer_shortname, tenant_id])
+        return True
+
+    def get_users_for_tenant(self, tenant_id: str = None):
+        if(tenant_id == None):
+            return None
+
+        list_of_users_for_tenant: list[dict[str, str, str]] = []
+
+        for user in users:
+            if(user[2] == tenant_id):
+                list_of_users_for_tenant.append(user)
+
+        return(list_of_users_for_tenant)
+
+    def delete_user(self, user) -> bool:
+        if(user == None):
+            return None
+        
+        users.remove(user)
+        return True
+        
+
 
 
 def billing_management():
@@ -69,19 +101,33 @@ def provisioning():
 
 class Registration():
     _tenant_management: TenantManagement
+    _user_management: UserManagement
 
-    def __init__(self, tenant_management: TenantManagement):
+
+    def __init__(self, tenant_management: TenantManagement, user_management: UserManagement):
         self._tenant_management = tenant_management
+        self._user_management = user_management
 
 
     def register(self, email: str = None, customer_shortname: str = None, billing_Address: str = None) -> bool:
-        tenant_id: str = self._tenant_management.create_tenant(customer_shortname)
+        # Create a Tenant ID
+        print("Calling tenant management service to create or fetch tenant id")
+        tenant_id: str = self._tenant_management.create_tenant(customer_shortname=customer_shortname)
         print(f"Tenant ID for {customer_shortname} is: {tenant_id}")
+
+        # Create the user
+        print(f"Calling user management service to create user: {email} for customer: {customer_shortname}")
+        self._user_management.create_user(email=email, customer_shortname=customer_shortname, tenant_id=tenant_id)
     
 
     def unregister(self, email: str = None, customer_shortname: str = None, billing_Address: str = None) -> bool:
         tenant_id: str = self._tenant_management.get_tenant_id(customer_shortname)
-        print(f"Deleting tenant: {customer_shortname}")
+        
+        print(f"Calling user management service to delete users for tenant: {tenant_id}")
+        for user in self._user_management.get_users_for_tenant(tenant_id=tenant_id):
+            self._user_management.delete_user(user=user)
+
+        print(f"CAlling tenant management service to delete tenant: {customer_shortname}")
         self._tenant_management.delete_tenant(tenant_id)
 
 
@@ -100,21 +146,29 @@ def main():
 
     # Instanciate all the pieces of the control plane
     tenant_management: TenantManagement = TenantManagement()
+    user_management: UserManagement = UserManagement()
 
 
     # Inform the registration microservice about the other parts of the control plane
-    registration: Registration = Registration(tenant_management)
+    registration: Registration = Registration(tenant_management, user_management)
 
 
     # Register some tenants
-    registration.register("user_email@customer.com", "customer_1", "billing address")
-    registration.register("user_email@customer.com", "customer_2", "billing address")
-    registration.register("user_email@customer.com", "customer_1", "billing address") # Including creating a duplicate
+    registration.register("user_email_1@customer_1.com", "customer_1", "billing address")
+    print("")
+    registration.register("user_email_2@customer_1.com", "customer_1", "billing address")
+    print("")
+    registration.register("user_email_1@customer_2.com", "customer_2", "billing address")
+    print("")
+    registration.register("user_email_1@customer_1.com", "customer_1", "billing address") # Including creating a duplicate
+    print("")
 
     # Delete a tenant
-    print("\nTenant ID for customer_1: ", tenant_management.get_tenant_id("customer_1"))
+    print("\nList of users for customer_1: ", user_management.get_users_for_tenant(tenant_management.get_tenant_id("customer_1")))
+    print("Tenant ID for customer_1: ", tenant_management.get_tenant_id("customer_1"))
     registration.unregister("user_email@customer.com", "customer_1", "billing address")
-    print("Tenant ID for customer_1: ", tenant_management.get_tenant_id("customer_1"), "\n")
+    print("Tenant ID for customer_1: ", tenant_management.get_tenant_id("customer_1"))
+    print("List of users for customer_1 after deleting tenant: ", user_management.get_users_for_tenant(tenant_management.get_tenant_id("customer_1")), "\n")
 
 
 if __name__ == '__main__':
