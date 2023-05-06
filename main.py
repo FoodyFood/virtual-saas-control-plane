@@ -2,92 +2,9 @@ import os
 import uuid
 import signal
 
+from services.TenantManagement import TenantManagement
+from services.UserManagement import UserManagement
 
-# Fake databases
-tenants: list[dict[str, str]] = [] # customer_shortname, tenant_id
-users:  list[dict[str, str, str]] = [] # email, customer_shortname, tenant_id
-
-
-class TenantManagement():
-    def create_tenant(self, customer_shortname: str = None) -> str:
-        if(customer_shortname == None):
-            return None
-
-        # Check if we already have a tenant id for this customer
-        for tenant in tenants:
-            if tenant[0] == customer_shortname:
-                # IF we do, return it instead of generating a new one
-                return tenant[1]
-
-        # If we get to here there was no tenant id found for the customer so we generate one
-        tenant_id = uuid.uuid4()
-
-        # We add our new tenant id to the tenant database
-        tenants.append([customer_shortname, tenant_id])
-
-        # And we return the newly generated tenant id
-        return(tenant_id)
-
-    def get_tenant_id(self, customer_shortname: str = None) -> str:
-        if(customer_shortname == None):
-            return None
-
-        # Check if we have a tenant id for this customer
-        for tenant in tenants:
-            if tenant[0] == customer_shortname:
-                # IF we do, return it instead of generating a new one
-                return tenant[1]
-
-        # If none was found, return none
-        return None
-
-    def delete_tenant(self, tenant_id: str = None) -> bool:
-        if(tenant_id == None):
-            return None
-
-        # Check if we already have a tenant id for this customer
-        for tenant in tenants:
-            if tenant[1] == tenant_id:
-                # IF we do, return it instead of generating a new one
-                tenants.remove([tenant[0], tenant[1]])
-                return(True)
-        return(False)
-    
-
-
-class UserManagement():
-    def create_user(self, email: str = None, customer_shortname: str = None, tenant_id: str = None) -> bool:
-        if(email == None or customer_shortname == None or tenant_id == None):
-            return None
-
-        # Check if the user already exists in the database
-        for user in users:
-            if(user[0] == email and user[1] == customer_shortname and user[2] == tenant_id):
-                return True # User already exists
-
-        # Add the user to the users database
-        users.append([email, customer_shortname, tenant_id])
-        return True
-
-    def get_users_for_tenant(self, tenant_id: str = None):
-        if(tenant_id == None):
-            return None
-
-        list_of_users_for_tenant: list[dict[str, str, str]] = []
-
-        for user in users:
-            if(user[2] == tenant_id):
-                list_of_users_for_tenant.append(user)
-
-        return(list_of_users_for_tenant)
-
-    def delete_user(self, user) -> bool:
-        if(user == None):
-            return None
-        
-        users.remove(user)
-        return True
-        
 
 
 
