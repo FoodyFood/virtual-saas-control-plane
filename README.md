@@ -1,6 +1,6 @@
 # Virtual SaaS Control Plane
 
-This project is a virtual/fake version of a SaaS control plane. It mimics the responsabilities of the various services laid out by AWS in their SaaS architecture slides.
+This project is a virtual/fake version of a SaaS control plane. It mimics the responsibilities of the various services laid out by AWS in their SaaS architecture slides.
 
 I created this as part of helping myself to figure out what was meant by 'control plane', and what each of the parts was supposed to do for us.
 
