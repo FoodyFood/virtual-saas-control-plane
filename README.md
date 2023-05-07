@@ -29,6 +29,13 @@ Finally, we provision any infra that is needed, free tier users may share some p
 The tenant management service is the keeper of the tenants tier, but we should also remember that a free tier tenant may switch to being a paid tenant, and we should accord for any re-provisioning of resources that happen when a tenant changes tier.
 
 
+## Architecture
+
+The admin user talks to the onboarding management service, and the onboarding management service then orchistrated the onboarding and handles talking to all the other services.
+
+![Control Plane Architecture](./docs/control_plane_services.png)
+
+
 ## Project Layout
 
 In the [main.py](./main.py) you will find the commands we are using to simulate interactions with the control plane services, it simulates an admin user inside the company.
