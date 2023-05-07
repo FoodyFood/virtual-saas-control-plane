@@ -3,22 +3,21 @@ from services.TenantManagement import TenantManagement
 from services.UserManagement import UserManagement
 from services.BillingManagement import BillingManagement
 from services.OnboardingManagement import OnboardingManagement
+from services.ProvisioningManagement import ProvisioningManagement
 
 
 # Instanciate all the pieces of the control plane
 tenant_management: TenantManagement = TenantManagement()
 user_management: UserManagement = UserManagement()
 billing_management: BillingManagement = BillingManagement()
+provisioning_management: ProvisioningManagement = ProvisioningManagement()
 
 
 # Inform the onboarding management service about the other parts of the control plane
-onboarding_management: OnboardingManagement = OnboardingManagement(tenant_management, user_management, billing_management)
+onboarding_management: OnboardingManagement = OnboardingManagement(tenant_management, user_management, billing_management, provisioning_management)
 
 
 class IdentityManagement():
-    pass
-
-class ProvisioningManagement():
     pass
 
 class Metrics():
@@ -43,6 +42,9 @@ def main():
 
     # Get custoemr_1 billing entity
     print("Billing entity for customer_1: ", billing_management.get_billing_entity_for_tenant(tenant_management.get_tenant_id("customer_1")))
+
+    # Get customer_1 provisioned infra
+    print("Provisioned infra for customer_1: ", provisioning_management.get_infra_for_tenant(tenant_management.get_tenant_id("customer_1")))
 
     # Delete a tenant
     print("\nList of users for customer_1: ", user_management.get_tenant_users((tenant_management.get_tenant_id("customer_1"))))
