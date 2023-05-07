@@ -31,9 +31,9 @@ This diagram was taken from one of the AWS re:Invent conferences. It shows the c
 
 ## Project Layout
 
-In the [main.py](./main.py) you will find the commands we are using to simulate interactions with the control plane services, it mimics the 'admin user' from the picture above.
+In the [main.py](./main.py) you will find the commands we are using to simulate interactions with the control plane services, it simulates the 'admin user' from the picture.
 
-In the services folder you will find a service that maps roughly 1:1 with each of the services seen in the control plane picture (except admin user which is represented by our main.py).
+In the services folder you will find a service that maps roughly 1:1 with each of the services found in the control plane (except admin user which is represented by our main.py).
 
 | Services                                                          |
 |-------------------------------------------------------------------|
