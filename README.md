@@ -11,22 +11,22 @@ In the [main.py](main.py) you will see some commands that reach out to the 'serv
 
 The files in the services folder would typically be their own services, be they lambdas or some other runtime. In this case I built this for learning purposes, and so each service is represented simply by a class that we instanciate and call to do thigns for us. In the real world we would be calling each of the services over REST API and each service would be it's own entity that scales and is updated and built at it's own pace. 
 
-You will also see in several of the 'services' that I have 'fake database' and a list initialized at the top of the file. In the real world these would be external databases such as DunamoDB. 
+You will also see in several of the 'services' that I have 'fake database' and a list initialized at the top of the file. In the real world these would be external databases such as DynamoDB. 
 
-Each of the services only knows as mush as it needs to, the tenant_id is the first thing generated when a new user is registered. If a second user is registered with the same customer_name, the tenant_id of the first user will be recycled so they live in the same tenant. 
+Each of the services only knows as much as it needs to, the tenant_id is the first thing generated when a new user is registered. If a second user is registered with the same customer_name, the tenant_id of the first user will be recycled so they live under the same tenant. 
 
-Once a tenant_id has been generated, we pass the user's email as well as their tenant_id over to the user management service which will create an user in the identity management service. The identity management service is mocked in this case, but would typically be something like Okta or Cognito. We pass the tenant_id into the identity management service such that it can be attached as a [claim](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-token-claims) to the user. The reason for this is that when the user logs into our SaaS application using the identity service, the tenant_id will be contained in their [JWT (Json Web Token)](https://jwt.io/) and our app can identify the tenant the user belongs to. This is useful because we want our app to log usage metrics against the tenant for billing purposes.
+Once a tenant_id has been generated, we pass the user's email as well as their tenant_id over to the user management service which will create a user in the identity management service. The identity management service is mocked in this case, but would typically be something like Okta or Cognito. We pass the tenant_id into the identity management service such that it can be attached as a [claim](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-token-claims) to the user. The reason for this is, when the user logs into our SaaS application using the identity service, the tenant_id will be contained in their [JWT (Json Web Token)](https://jwt.io/) and our app can identify the tenant the user belongs to. This is useful because we want our app to log usage metrics against the tenant for billing purposes.
 
-Next we create a billing entity, again attached to the tenant_id. The billing management service will check our metricks management service for metrics belonging to the tenant, and bill according to the usage it finds. Charged at some rate per use or per consumed resource.
+Next we create a billing entity, again attached to the tenant_id. The billing management service will check our metrics management service for metrics belonging to the tenant and bill according to the usage it finds. Usage being charged at some rate per use or per consumed resource.
 
-Finally, we provision any infra that is needed, free tier users may just share some pool of low grade resources, whereas premium may get a completely siloed deployment of their own.
+Finally, we provision any infra that is needed, free tier users may share some pool of low grade resources, whereas premium may get a completely siloed deployment.
 
 The tenant management service is the keeper of the tenants tier, but we should also remember that a free tier tenant may switch to being a paid tenant, and we should accord for any re-provisioning of resources that happen when a tenant changes tier.
 
 
 ## Control Plane Architecture
 
-This diagram was taken from one of the AWS RE:Invent conferences. It shows the control plane on the right that I have attempted to mimic. 
+This diagram was taken from one of the AWS re:Invent conferences. It shows the control plane on the right that I have attempted to mimic. 
 
 ![control_plane_services](docs/control_plane_services.png)
 
@@ -35,17 +35,17 @@ This diagram was taken from one of the AWS RE:Invent conferences. It shows the c
 
 In the [main.py](./main.py) you will find the commands we are using to simulate interactions with the control plane services.
 
-In the services folder you will find a service that maps roughly 1:1 with the services seen in the control plane picture.
+In the services folder you will find a service that maps roughly 1:1 with each of the services seen in the control plane picture (except admin user which is represented by our main.py).
 
-| Services        |
-|-----------------|
-| Onboarding      |
-| Tenant          |
-| User            |
-| Identity        |
-| Billing         |
-| Provisioning    |
-| Metrics         |
+| Services                  |
+|---------------------------|
+| Onboarding Management     |
+| Tenant Management         |
+| User Management           |
+| Identity Management       |
+| Billing Management        |
+| Provisioning Management   |
+| Metrics Management        |
 
 
 ## What Is The Purpose Of Each Service?
