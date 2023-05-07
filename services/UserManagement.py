@@ -1,28 +1,29 @@
-# Fake databases
-users:  list[dict[str, str]] = []  # tenant_id, email
+from services.IdentityManagement import IdentityManagement
 
 
 class UserManagement():
+    _identity_management: IdentityManagement
+
+    def __init__(self):
+        self._identity_management = IdentityManagement()
+
     def create_user(self, tenant_id: str = None, email: str = None) -> bool:
         if (tenant_id == None or email == None):
             return None
 
-        # Check if the user already exists in the database
-        for user in users:
-            if (user[0] == email and user[1] == tenant_id):
-                return True  # User already exists
-
-        # Add the user to the users database
-        users.append([tenant_id, email])
+        # Tell the identity management service to add the user
+        self._identity_management.add_user(tenant_id=tenant_id, email=email)
         return True
 
     def get_tenant_users(self, tenant_id: str = None):
         if (tenant_id == None):
             return None
 
+        list_of_users: list[dict[str,str]] = self._identity_management.get_list_of_users()
+
         list_of_tenant_users: list[dict[str, str]] = []
 
-        for user in users:
+        for user in list_of_users:
             if (user[0] == tenant_id):
                 list_of_tenant_users.append(user)
 
@@ -32,5 +33,5 @@ class UserManagement():
         if (user == None):
             return None
 
-        users.remove(user)
+        self._identity_management.delete_user(user)
         return True

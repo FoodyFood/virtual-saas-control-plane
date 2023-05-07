@@ -17,8 +17,7 @@ provisioning_management: ProvisioningManagement = ProvisioningManagement()
 onboarding_management: OnboardingManagement = OnboardingManagement(tenant_management, user_management, billing_management, provisioning_management)
 
 
-class IdentityManagement():
-    pass
+
 
 class Metrics():
     pass
