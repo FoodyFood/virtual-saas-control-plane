@@ -31,7 +31,7 @@ The tenant management service is the keeper of the tenants tier, but we should a
 
 ## Architecture
 
-The admin user talks to the onboarding management service, and the onboarding management service then orchistrated the onboarding and handles talking to all the other services.
+The admin user talks to the onboarding management service, and the onboarding management service then orchistrates the onboarding and handles talking to all the other services:
 
 ![Control Plane Architecture](./docs/control_plane_services.png)
 
