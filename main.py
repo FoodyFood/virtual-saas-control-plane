@@ -28,19 +28,24 @@ class Metrics():
 def main():
 
     # Onboard some tenants/users
-    onboarding_management.register("user_email_1@customer_1.com", "customer_1", "billing address")
+    onboarding_management.register(email="user_email_1@customer_1.com", customer_shortname="customer_1", billing_Address="billing address", tier="standard")
     print("")
-    onboarding_management.register("user_email_2@customer_1.com", "customer_1", "billing address")
+    onboarding_management.register(email="user_email_2@customer_1.com", customer_shortname="customer_1", billing_Address="billing address", tier="standard")
     print("")
-    onboarding_management.register("user_email_1@customer_2.com", "customer_2", "billing address")
+    onboarding_management.register(email="user_email_1@customer_2.com", customer_shortname="customer_2", billing_Address="billing address", tier="standard")
     print("")
-    onboarding_management.register("user_email_1@customer_1.com", "customer_1", "billing address") # Including creating a duplicate
+    onboarding_management.register(email="user_email_1@customer_1.com",customer_shortname= "customer_1", billing_Address="billing address", tier="standard") # Including creating a duplicate
     print("")
+
+
+    # Get tenant tier
+    print("Tier for customer_1: ", tenant_management.get_tenant_tier(tenant_management.get_tenant_id("customer_1")))
+
 
     # Delete a tenant
     print("\nList of users for customer_1: ", user_management.get_users_for_tenant(tenant_management.get_tenant_id("customer_1")))
     print("Tenant ID for customer_1: ",tenant_management.get_tenant_id("customer_1"))
-    onboarding_management.unregister("user_email@customer.com", "customer_1", "billing address")
+    onboarding_management.unregister(email="user_email@customer.com", customer_shortname="customer_1")
     print("Tenant ID for customer_1: ", tenant_management.get_tenant_id("customer_1"))
     print("List of users for customer_1 after deleting tenant: ", user_management.get_users_for_tenant(tenant_management.get_tenant_id("customer_1")), "\n")
 
