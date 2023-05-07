@@ -1,17 +1,17 @@
 import uuid
 
 # Fake database
-tenants: list[dict[str, str, str]] = []  # customer_shortname, tenant_id, tier
+tenants: list[dict[str, str, str]] = []  # customer_name, tenant_id, tier
 
 
 class TenantManagement():
-    def create_tenant(self, customer_shortname: str = None, tier: str = None) -> str:
-        if (customer_shortname == None or tier == None):
+    def create_tenant(self, customer_name: str = None, tier: str = None) -> str:
+        if (customer_name == None or tier == None):
             return None
 
         # Check if we already have a tenant id for this customer
         for tenant in tenants:
-            if tenant[0] == customer_shortname:
+            if tenant[0] == customer_name:
                 # IF we do, return it instead of generating a new one
                 return tenant[1]
 
@@ -19,20 +19,33 @@ class TenantManagement():
         tenant_id = uuid.uuid4()
 
         # We add our new tenant id to the tenant database
-        tenants.append([customer_shortname, tenant_id, tier])
+        tenants.append([customer_name, tenant_id, tier])
 
         # And we return the newly generated tenant id
         return (tenant_id)
 
-    def get_tenant_id(self, customer_shortname: str = None) -> str:
-        if (customer_shortname == None):
+    def get_tenant_id(self, customer_name: str = None) -> str:
+        if (customer_name == None):
             return None
 
         # Check if we have a tenant id for this customer
         for tenant in tenants:
-            if tenant[0] == customer_shortname:
+            if tenant[0] == customer_name:
                 # IF we do, return it instead of generating a new one
                 return tenant[1]
+
+        # If none was found, return none
+        return None
+
+    def get_tenant_customer_name(self, tenant_id: str = None) -> str:
+        if (tenant_id == None):
+            return None
+
+        # Check if we have a tenant id for this customer
+        for tenant in tenants:
+            if tenant[1] == tenant_id:
+                # IF we do, return it instead of generating a new one
+                return tenant[0]
 
         # If none was found, return none
         return None
