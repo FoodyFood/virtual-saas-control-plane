@@ -1,23 +1,27 @@
 # Inport our control plane services
 from services.TenantManagement import TenantManagement
 from services.UserManagement import UserManagement
+from services.BillingManagement import BillingManagement
 from services.OnboardingManagement import OnboardingManagement
 
 
 # Instanciate all the pieces of the control plane
 tenant_management: TenantManagement = TenantManagement()
 user_management: UserManagement = UserManagement()
+billing_management: BillingManagement = BillingManagement()
 
 
 # Inform the onboarding management service about the other parts of the control plane
-onboarding_management: OnboardingManagement = OnboardingManagement(tenant_management, user_management)
+onboarding_management: OnboardingManagement = OnboardingManagement(tenant_management, user_management, billing_management)
 
 
-def billing_management():
+class IdentityManagement():
     pass
 
+class TenantAppProvisioningManagement():
+    pass
 
-def provisioning():
+class Metrics():
     pass
 
 

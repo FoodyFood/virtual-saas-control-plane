@@ -1,15 +1,19 @@
 # Inport our control plane services
 from services.TenantManagement import TenantManagement
 from services.UserManagement import UserManagement
+from services.BillingManagement import BillingManagement
 
 
 class OnboardingManagement():
     _tenant_management: TenantManagement
     _user_management: UserManagement
+    _billing_management: BillingManagement
 
-    def __init__(self, tenant_management: TenantManagement, user_management: UserManagement):
+
+    def __init__(self, tenant_management: TenantManagement, user_management: UserManagement, billing_management: BillingManagement):
         self._tenant_management = tenant_management
         self._user_management = user_management
+        self._billing_management = billing_management
 
     def register(self, email: str = None, customer_shortname: str = None, billing_Address: str = None) -> bool:
         # Create a Tenant ID
