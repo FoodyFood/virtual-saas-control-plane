@@ -18,7 +18,7 @@ onboarding_management: OnboardingManagement = OnboardingManagement(tenant_manage
 class IdentityManagement():
     pass
 
-class TenantAppProvisioningManagement():
+class ProvisioningManagement():
     pass
 
 class Metrics():
@@ -28,13 +28,13 @@ class Metrics():
 def main():
 
     # Onboard some tenants/users
-    onboarding_management.register(email="user_email_1@customer_1.com", customer_name="customer_1", billing_Address="customer 1 billing address", tier="standard")
+    onboarding_management.register(email="user_email_1@customer_1.com", customer_name="customer_1", billing_address="customer 1 billing address", tier="standard")
     print("")
-    onboarding_management.register(email="user_email_2@customer_1.com", customer_name="customer_1", billing_Address="customer 1 billing address", tier="standard")
+    onboarding_management.register(email="user_email_2@customer_1.com", customer_name="customer_1", billing_address="customer 1 billing address", tier="standard")
     print("")
-    onboarding_management.register(email="user_email_1@customer_2.com", customer_name="customer_2", billing_Address="customer 2 billing address", tier="standard")
+    onboarding_management.register(email="user_email_1@customer_2.com", customer_name="customer_2", billing_address="customer 2 billing address", tier="premium")
     print("")
-    onboarding_management.register(email="user_email_1@customer_1.com",customer_name= "customer_1", billing_Address="customer 1 billing address", tier="standard") # Including creating a duplicate
+    onboarding_management.register(email="user_email_1@customer_1.com", customer_name="customer_1", billing_address="customer 1 billing address", tier="standard") # Including creating a duplicate
     print("")
 
 

@@ -15,7 +15,7 @@ class OnboardingManagement():
         self._user_management = user_management
         self._billing_management = billing_management
 
-    def register(self, email: str = None, customer_name: str = None, billing_Address: str = None, tier: str = None) -> bool:
+    def register(self, email: str = None, customer_name: str = None, billing_address: str = None, tier: str = None) -> bool:
         # Create a Tenant ID
         print("Calling tenant management service to create or fetch tenant id")
         tenant_id: str = self._tenant_management.create_tenant(customer_name=customer_name, tier=tier)
@@ -27,7 +27,7 @@ class OnboardingManagement():
 
         # Create the billing entity
         print("Calling the billing management service to create the billing entity")
-        self._billing_management.create_billing_entity(tenant_id=tenant_id, billing_address=billing_Address)
+        self._billing_management.create_billing_entity(tenant_id=tenant_id, billing_address=billing_address)
 
     def unregister(self, email: str = None, customer_name: str = None, tenant_id: str = None) -> bool:
         '''
