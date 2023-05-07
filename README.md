@@ -26,7 +26,7 @@ The tenant management service is the keeper of the tenants tier, but we should a
 
 ## Control Plane Architecture
 
-This diagram was taken from one of the AWS re:Invent conferences. It shows the control plane on the right that I have attempted to mimic. 
+This diagram was taken from one of the AWS re:Invent conferences. It shows the control plane on the right that I have simulated.
 
 ![control_plane_services](docs/control_plane_services.png)
 
