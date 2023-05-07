@@ -7,9 +7,11 @@ I created this as part of helping myself to figure out what was meant by 'contro
 
 ## Description
 
-In the [main.py](main.py) you will see some commands that reach out to the 'services' to perform various actions such as registering a new user/tenant, checking their billing/usage, checking the tenants tier (standard/premium), and finally deleting a tenant.
+In the [main.py](main.py) you will see some commands that reach out to the 'services' to perform various actions such as registering a new user/tenant, checking their billing/usage, checking the tenants tier (free/standard/premium), and finally deleting a tenant.
 
-The files in the services folder would typically be their own services, be they lambdas or some other runtime. In this case I built this for learning purposes, and so each service is represented simply by a class that we instanciate and call to do thigns for us. In the real world we would be calling each of the services over REST API and each service would be it's own entity that scales and is updated and built at it's own pace.
+The files in the services folder would typically be their own services, be they lambdas or some other runtime. In this case I built this for learning purposes, and so each service is represented simply by a class that we instanciate and call to do thigns for us. In the real world we would be calling each of the services over REST API and each service would be it's own entity that scales and is updated and built at it's own pace. 
+
+You will also see in several of the 'services' that I have 'fake database' and a list initialized at the top of the file. In the real world these would be external databases such as DunamoDB. 
 
 Each of the services only knows as mush as it needs to, the tenant_id is the first thing generated when a new user is registered. If a second user is registered with the same customer_name, the tenant_id of the first user will be recycled so they live in the same tenant. 
 
