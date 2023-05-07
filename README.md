@@ -50,8 +50,6 @@ In the services folder you will find a service that maps roughly 1:1 with each o
 
 ## What Is The Purpose Of Each Service?
 
-Many of these notes were borrowed or augmented from AWS's: [SaaS WAF](https://docs.aws.amazon.com/whitepapers/latest/saas-architecture-fundamentals/saas-architecture-fundamentals.html)
-
 Onboarding – Every SaaS solution must provide a frictionless mechanism for introducing new
 tenants into your SaaS environment. This can be a self-service sign-up page or an internally managed
 experience. Either way, a SaaS solution should do all that it can remove internal and external friction
@@ -86,6 +84,9 @@ engage their systems. This data is used to shape operational, product, and busin
 Hopefully someone finds this useful, there is no error handling, and there are no tests. This was assembled in a matter of hours on a Saturday night, so don't expect wonders.
 
 
+## Further Reading
+
+[SaaS WAF](https://docs.aws.amazon.com/whitepapers/latest/saas-architecture-fundamentals/saas-architecture-fundamentals.html)
 
 
 
