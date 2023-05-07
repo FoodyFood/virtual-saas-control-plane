@@ -10,7 +10,7 @@ The control plane is foundational to any multi-tenant SaaS model. Every SaaS sol
 A control plane is the heart of a SaaS company, it handles everything from onboarding new users to sending bills. The control plane takes care of creating and managing tenants, provisioning infrastructure, gathering metrics and attributing them to tenants such that billing can be performed, as well as shutting down and removing resources when a tanant cancelles their contract. 
 
 
-## Project Description
+## Code Overview
 
 In the [main.py](main.py) you will see some commands that reach out to the 'services' to perform various actions such as registering a new user/tenant, checking their billing/usage, checking the tenants tier (free/standard/premium), and finally deleting a tenant.
 
