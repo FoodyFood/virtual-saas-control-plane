@@ -1,6 +1,6 @@
 # Virtual SaaS Control Plane
 
-This project is a simulated version of a SaaS control plane.
+This project simulates a SaaS control plane including each of it's services and the databases they use.
 
 
 ## Description
