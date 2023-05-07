@@ -29,18 +29,11 @@ Finally, we provision any infra that is needed, free tier users may share some p
 The tenant management service is the keeper of the tenants tier, but we should also remember that a free tier tenant may switch to being a paid tenant, and we should accord for any re-provisioning of resources that happen when a tenant changes tier.
 
 
-## Control Plane Architecture
-
-This diagram was taken from one of the AWS re:Invent conferences. It shows the control plane on the right that I have simulated.
-
-![control_plane_services](docs/control_plane_services.png)
-
-
 ## Project Layout
 
-In the [main.py](./main.py) you will find the commands we are using to simulate interactions with the control plane services, it simulates the 'admin user' from the picture.
+In the [main.py](./main.py) you will find the commands we are using to simulate interactions with the control plane services, it simulates an admin user inside the company.
 
-In the services folder you will find a service that maps roughly 1:1 with each of the services found in the control plane (except admin user which is represented by our main.py).
+In the services folder you will find a service that maps 1:1 with each of the services needed in a control plane.
 
 | Services                                                          |
 |-------------------------------------------------------------------|
