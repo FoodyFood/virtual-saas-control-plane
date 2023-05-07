@@ -2,8 +2,21 @@ billing_entities: list[dict[str, str, str]] = [] # customer_name, billing_addres
 
 
 class BillingManagement():
-    def create_billing_entity(customer_name: str = None, billing_address: str = None, tenant_id: str = None):
-        pass
+    def create_billing_entity(self, tenant_id: str = None, billing_address: str = None) -> str:
+        for billing_entity in billing_entities:
+            if billing_entity == [tenant_id, billing_address]:
+                return True # Entity already exists
 
-    def delete_billing_entity():
-        pass
+        billing_entities.append([tenant_id, billing_address])
+        return True
+
+    def get_billing_entity_for_tenant(self, tenant_id: str):
+        for billing_entity in billing_entities:
+            if billing_entity[0] == tenant_id:
+                return (billing_entity)
+
+    def delete_billing_entity(self, tenant_id: str = None) -> str:
+        for billing_entity in billing_entities:
+            if billing_entity[0] == tenant_id:
+                billing_entities.remove(billing_entity)
+        return True

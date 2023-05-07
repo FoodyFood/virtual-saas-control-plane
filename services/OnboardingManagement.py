@@ -25,6 +25,10 @@ class OnboardingManagement():
         print(f"Calling user management service to create user: {email} for customer: {customer_name}")
         self._user_management.create_user(email=email, tenant_id=tenant_id)
 
+        # Create the billing entity
+        print("Calling the billing management service to create the billing entity")
+        self._billing_management.create_billing_entity(tenant_id=tenant_id, billing_address=billing_Address)
+
     def unregister(self, email: str = None, customer_name: str = None, tenant_id: str = None) -> bool:
         '''
         Must pass 1 of either customer_name or tenant_id
@@ -33,6 +37,10 @@ class OnboardingManagement():
         
         if(tenant_id == None):
             tenant_id: str = self._tenant_management.get_tenant_id(customer_name)
+
+        # Delete the billing entity
+        print("Calling the billing management service to delete the billing entity")
+        self._billing_management.delete_billing_entity(tenant_id=tenant_id)
 
         print(f"Calling user management service to delete users for tenant: {tenant_id}")
         for user in self._user_management.get_tenant_users(tenant_id=tenant_id):

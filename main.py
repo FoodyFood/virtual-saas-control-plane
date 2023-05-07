@@ -28,19 +28,21 @@ class Metrics():
 def main():
 
     # Onboard some tenants/users
-    onboarding_management.register(email="user_email_1@customer_1.com", customer_name="customer_1", billing_Address="billing address", tier="standard")
+    onboarding_management.register(email="user_email_1@customer_1.com", customer_name="customer_1", billing_Address="customer 1 billing address", tier="standard")
     print("")
-    onboarding_management.register(email="user_email_2@customer_1.com", customer_name="customer_1", billing_Address="billing address", tier="standard")
+    onboarding_management.register(email="user_email_2@customer_1.com", customer_name="customer_1", billing_Address="customer 1 billing address", tier="standard")
     print("")
-    onboarding_management.register(email="user_email_1@customer_2.com", customer_name="customer_2", billing_Address="billing address", tier="standard")
+    onboarding_management.register(email="user_email_1@customer_2.com", customer_name="customer_2", billing_Address="customer 2 billing address", tier="standard")
     print("")
-    onboarding_management.register(email="user_email_1@customer_1.com",customer_name= "customer_1", billing_Address="billing address", tier="standard") # Including creating a duplicate
+    onboarding_management.register(email="user_email_1@customer_1.com",customer_name= "customer_1", billing_Address="customer 1 billing address", tier="standard") # Including creating a duplicate
     print("")
 
 
     # Get tenant tier
     print("Tier for customer_1: ", tenant_management.get_tenant_tier(tenant_management.get_tenant_id("customer_1")))
 
+    # Get custoemr_1 billing entity
+    print("Billing entity for customer_1: ", billing_management.get_billing_entity_for_tenant(tenant_management.get_tenant_id("customer_1")))
 
     # Delete a tenant
     print("\nList of users for customer_1: ", user_management.get_tenant_users((tenant_management.get_tenant_id("customer_1"))))
