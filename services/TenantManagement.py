@@ -50,9 +50,14 @@ class TenantManagement():
         # If none was found, return none
         return None
 
-    def get_tenant_tier(self, tenant_id: str = None) -> str:
+    def get_tenant_tier(self, tenant_id: str = None, customer_name: str = None) -> str:
+        '''
+        Must pass 1 of either tenant_id or customer_name
+        Returns tenant tier as string if tenant exists
+        '''
+
         if (tenant_id == None):
-            return None
+            tenant_id = self.get_tenant_id(customer_name=customer_name)
 
         # Check if we already have a tenant id for this customer
         for tenant in tenants:
