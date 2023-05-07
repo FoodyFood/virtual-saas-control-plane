@@ -37,15 +37,15 @@ In the [main.py](./main.py) you will find the commands we are using to simulate 
 
 In the services folder you will find a service that maps roughly 1:1 with each of the services seen in the control plane picture (except admin user which is represented by our main.py).
 
-| Services                  |
-|---------------------------|
-| Onboarding Management     |
-| Tenant Management         |
-| User Management           |
-| Identity Management       |
-| Billing Management        |
-| Provisioning Management   |
-| Metrics Management        |
+| Services                                                          |
+|-------------------------------------------------------------------|
+| [Onboarding Management](./services/OnboardingManagement.py)       |
+| [Tenant Management](./services/TenantManagement.py)               |
+| [User Management](./services/UserManagement.py)                   |
+| [Identity Management](./services/IdentityManagement.py)           |
+| [Billing Management](./services/BillingManagement.py)             |
+| [Provisioning Management](./services/ProvisioningManagement.py)   |
+| [Metrics Management](./services/MetricsManagement.py)             |
 
 
 ## What Is The Purpose Of Each Service?
