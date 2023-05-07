@@ -39,15 +39,27 @@ def main():
     # Get customer_1 provisioned infra
     print("Provisioned infra for customer_1: ", provisioning_management.get_infra_for_tenant(tenant_management.get_tenant_id("customer_1")))
 
-    # Generate invoice line items for tenant
-    print("GEnerate line items for invoice using billing and metrics service: ", billing_management.generate_invoice(tenant_management.get_tenant_id("customer_1")))
 
-    # Delete a tenant
+    # Delete customer_1 tenant
     print("\nList of users for customer_1: ", user_management.get_tenant_users((tenant_management.get_tenant_id("customer_1"))))
     print("Tenant ID for customer_1: ",tenant_management.get_tenant_id("customer_1"))
     onboarding_management.unregister(email="user_email@customer.com", customer_name="customer_1")
     print("Tenant ID for customer_1: ", tenant_management.get_tenant_id("customer_1"))
     print("List of users for customer_1 after deleting tenant: ", user_management.get_tenant_users(tenant_management.get_tenant_id("customer_1")), "\n")
+
+
+    # Get tenant 2 tier
+    print("Tier for customer_2: ", tenant_management.get_tenant_tier(tenant_management.get_tenant_id("customer_2")))
+
+    # Get custoemr_2 billing entity
+    print("Billing entity for customer_2: ", billing_management.get_billing_entity_for_tenant(tenant_management.get_tenant_id("customer_2")))
+
+    # Get customer_2 provisioned infra
+    print("Provisioned infra for customer_2: ", provisioning_management.get_infra_for_tenant(tenant_management.get_tenant_id("customer_2")))
+
+    # Generate invoice line items for tenant
+    print("GEnerate line items for invoice using billing and metrics service: ", billing_management.generate_invoice(tenant_management.get_tenant_id("customer21")))
+
 
 
 if __name__ == '__main__':
