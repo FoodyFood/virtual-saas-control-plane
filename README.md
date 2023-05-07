@@ -7,7 +7,7 @@ I created this as part of helping myself to figure out what was meant by 'contro
 
 ## Description
 
-In the [main.py](main.py) you will see some commands that reach out to the 'services' to perform various actions such as registering a new user/tenant. Checking their billing/usage, checking the tenants tier (standard/premium), and finally deleting a tenant.
+In the [main.py](main.py) you will see some commands that reach out to the 'services' to perform various actions such as registering a new user/tenant, checking their billing/usage, checking the tenants tier (standard/premium), and finally deleting a tenant.
 
 The files in the services folder would typically be their own services, be they lambdas or some other runtime. In this case I built this for learning purposes, and so each service is represented simply by a class that we instanciate and call to do thigns for us. In the real world we would be calling each of the services over REST API and each service would be it's own entity that scales and is updated and built at it's own pace.
 
