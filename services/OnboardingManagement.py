@@ -23,13 +23,19 @@ class OnboardingManagement():
 
         # Create the user
         print(f"Calling user management service to create user: {email} for customer: {customer_name}")
-        self._user_management.create_user(email=email, customer_name=customer_name, tenant_id=tenant_id)
+        self._user_management.create_user(email=email, tenant_id=tenant_id)
 
-    def unregister(self, email: str = None, customer_name: str = None) -> bool:
-        tenant_id: str = self._tenant_management.get_tenant_id(customer_name)
+    def unregister(self, email: str = None, customer_name: str = None, tenant_id: str = None) -> bool:
+        '''
+        Must pass 1 of either customer_name or tenant_id
+        Will clean up all users first, then delete the tenant.
+        '''
+        
+        if(tenant_id == None):
+            tenant_id: str = self._tenant_management.get_tenant_id(customer_name)
 
         print(f"Calling user management service to delete users for tenant: {tenant_id}")
-        for user in self._user_management.get_users_for_tenant(tenant_id=tenant_id):
+        for user in self._user_management.get_tenant_users(tenant_id=tenant_id):
             self._user_management.delete_user(user=user)
 
         print(f"CAlling tenant management service to delete tenant: {customer_name}")

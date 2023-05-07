@@ -43,11 +43,11 @@ def main():
 
 
     # Delete a tenant
-    print("\nList of users for customer_1: ", user_management.get_users_for_tenant(tenant_management.get_tenant_id("customer_1")))
+    print("\nList of users for customer_1: ", user_management.get_tenant_users((tenant_management.get_tenant_id("customer_1"))))
     print("Tenant ID for customer_1: ",tenant_management.get_tenant_id("customer_1"))
     onboarding_management.unregister(email="user_email@customer.com", customer_name="customer_1")
     print("Tenant ID for customer_1: ", tenant_management.get_tenant_id("customer_1"))
-    print("List of users for customer_1 after deleting tenant: ", user_management.get_users_for_tenant(tenant_management.get_tenant_id("customer_1")), "\n")
+    print("List of users for customer_1 after deleting tenant: ", user_management.get_tenant_users(tenant_management.get_tenant_id("customer_1")), "\n")
 
 
 if __name__ == '__main__':

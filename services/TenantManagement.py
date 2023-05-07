@@ -12,11 +12,11 @@ class TenantManagement():
         # Check if we already have a tenant id for this customer
         for tenant in tenants:
             if tenant[0] == customer_name:
-                # IF we do, return it instead of generating a new one
+                # If we do, return it instead of generating a new one
                 return tenant[1]
 
         # If we get to here there was no tenant id found for the customer so we generate one
-        tenant_id = uuid.uuid4()
+        tenant_id = str(uuid.uuid4())
 
         # We add our new tenant id to the tenant database
         tenants.append([customer_name, tenant_id, tier])
