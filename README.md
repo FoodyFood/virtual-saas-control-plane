@@ -3,7 +3,14 @@
 This project simulates a SaaS control plane including each of it's services and the databases they use.
 
 
-## Description
+## What Is A SaaS Control Plane?
+
+The control plane is foundational to any multi-tenant SaaS model. Every SaaS solution regardless of application deployment and isolation scheme must include these services to give you the ability to manage and operate your tenants with ease.
+
+A control plane is the heart of a SaaS company, it handles everything from onboarding new users to sending bills. The control plane takes care of creating and managing tenants, provisioning infrastructure, gathering metrics and attributing them to tenants such that billing can be performed, as well as shutting down and removing resources when a tanant cancelles their contract. 
+
+
+## Project Description
 
 In the [main.py](main.py) you will see some commands that reach out to the 'services' to perform various actions such as registering a new user/tenant, checking their billing/usage, checking the tenants tier (free/standard/premium), and finally deleting a tenant.
 
