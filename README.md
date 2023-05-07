@@ -63,11 +63,11 @@ resources.
 Tenant – The tenant service provides a way to centralize the policies, attributes, and state of tenants.
 The key is that tenants are not individual users. In fact, a tenant is likely associated with many users.
 
-User – Adding users to the identity store, making sure they have the relevant claims like tier, tenant_id etc.
+User – Adding users to the identity store, making sure they have the relevant claims like tenant_id.
 
 Identity – SaaS systems need a clear way to connect users to tenants that will bring tenant context
 to the authentication and authorization experience of their solutions. Identity is where the users will log in
-typically this is handles by Okta or Cognito, but in this case I added a mock service for completeness.
+typically this is handled by Okta or Cognito, but in this case I added a mock service for completeness.
 
 Billing – As part of adopting SaaS, organizations often embrace new billing models. They may also
 explore integration with third-party billing providers. This core service is largely focused on supporting
@@ -83,7 +83,7 @@ engage their systems. This data is used to shape operational, product, and busin
 
 ## Closing Remarks
 
-Hopefully someone finds this useful, there is no error handling and there are no tests, this was assembled in a matter of hours on a Saturday night, so don't expect wonders.
+Hopefully someone finds this useful, there is no error handling, and there are no tests. This was assembled in a matter of hours on a Saturday night, so don't expect wonders.
 
 
 
