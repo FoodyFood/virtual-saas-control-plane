@@ -1,4 +1,4 @@
-billing_entities: list[dict[str, str, str]] = [] # customer_name, billing_address, tenant_id
+billing_entities: list[dict[str, str, str]] = [] # tenant_id, billing_address
 
 
 class BillingManagement():
