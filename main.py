@@ -17,12 +17,6 @@ provisioning_management: ProvisioningManagement = ProvisioningManagement()
 onboarding_management: OnboardingManagement = OnboardingManagement(tenant_management, user_management, billing_management, provisioning_management)
 
 
-
-
-class Metrics():
-    pass
-
-
 def main():
 
     # Onboard some tenants/users
@@ -44,6 +38,9 @@ def main():
 
     # Get customer_1 provisioned infra
     print("Provisioned infra for customer_1: ", provisioning_management.get_infra_for_tenant(tenant_management.get_tenant_id("customer_1")))
+
+    # Generate invoice line items for tenant
+    print("GEnerate line items for invoice using billing and metrics service: ", billing_management.generate_invoice(tenant_management.get_tenant_id("customer_1")))
 
     # Delete a tenant
     print("\nList of users for customer_1: ", user_management.get_tenant_users((tenant_management.get_tenant_id("customer_1"))))
