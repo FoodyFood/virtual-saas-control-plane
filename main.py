@@ -13,7 +13,7 @@ billing_management: BillingManagement = BillingManagement()
 provisioning_management: ProvisioningManagement = ProvisioningManagement()
 
 
-# Inform the onboarding management service about the other parts of the control plane
+# Inform the onboarding management service about the other services in the control plane
 onboarding_management: OnboardingManagement = OnboardingManagement(tenant_management, user_management, billing_management, provisioning_management)
 
 
